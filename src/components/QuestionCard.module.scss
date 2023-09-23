@@ -1,0 +1,36 @@
+.container{
+    padding: 10px;
+    margin-bottom: 20px;
+    &:hover{
+        box-shadow: 0 4px 10px #ccc;
+    }
+}
+
+.title{
+    display: flex;
+    .left{
+        flex: 1;
+        text-align: left;
+    }
+
+    .right{
+        flex: 1;
+        text-align: end;
+    }
+}
+
+.button-container{
+    display: flex;
+    .left{
+        flex: 1;
+        text-align: left;
+    }
+
+    .right{
+        flex: 1;
+        text-align: end;
+        & button{
+            color: #ccc;
+        }
+    }
+}
