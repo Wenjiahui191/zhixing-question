@@ -1,13 +1,10 @@
 import * as React from 'react'
-import List from './pages/manage/List'
+import { RouterProvider } from 'react-router-dom'
+import router from './router'
 import './App.css'
 
 function App() {
-  return (
-    <div className="App">
-      <List />
-    </div>
-  )
+  return <RouterProvider router={router}></RouterProvider>
 }
 
 export default App
