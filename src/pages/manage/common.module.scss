@@ -1,0 +1,19 @@
+.header{
+    display: flex;
+    .left{
+        flex: 1;
+        text-align: left;
+    }
+    .right{
+        flex: 1;
+        text-align: right;
+    }
+}
+
+.content{
+    // padding: 12px;
+}
+
+.footer{
+    text-align: center;
+}
