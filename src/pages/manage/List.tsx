@@ -1,8 +1,10 @@
 import React, { FC, useState } from 'react'
 import QuestionCard from '../../components/QuestionCard'
-import { Typography } from 'antd'
+import { Spin, Typography } from 'antd'
 import ListSearch from '../../components/ListSearch'
 import styles from './common.module.scss'
+import { useRequest } from 'ahooks'
+import { getQuestionListService } from '@/services/question'
 
 const { Title } = Typography
 
@@ -44,8 +46,15 @@ const rowQuestionList = [
 const List: FC = () => {
   const [questionList, setQuestionList] = useState(rowQuestionList)
 
+  const { loading, error } = useRequest(getQuestionListService, {
+    onSuccess: result => {
+      const { list = [], total } = result
+      setQuestionList(list)
+    },
+  })
+
   return (
-    <>
+    <Spin tip="Loading..." spinning={loading}>
       <div className={styles.header}>
         <Title level={3} className={styles.left}>
           我的问卷
@@ -60,7 +69,7 @@ const List: FC = () => {
         })}
       </div>
       <div className={styles.footer}>底部</div>
-    </>
+    </Spin>
   )
 }
 
