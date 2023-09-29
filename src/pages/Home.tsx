@@ -9,14 +9,6 @@ const { Title, Paragraph } = Typography
 const Home: FC = () => {
   const nav = useNavigate()
 
-  useEffect(() => {
-    fetch('/api/question/111')
-      .then(res => res.json())
-      .then(data => {
-        console.log('fetch/data', data)
-      })
-  }, [])
-
   return (
     <div className={styles.container}>
       <div className={styles.info}>

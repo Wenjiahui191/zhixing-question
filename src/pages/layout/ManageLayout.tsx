@@ -9,10 +9,22 @@ import {
 } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom'
 import styles from './Manage.module.scss'
+import { useRequest } from 'ahooks'
+import { createQuestionService } from '@/services/question'
 
 const ManageLayout: FC = () => {
   const nav = useNavigate()
   const { pathname } = useLocation()
+
+  const { loading, run: handleCreateQuestion } = useRequest(createQuestionService, {
+    manual: true,
+    onSuccess: result => {
+      const { id = '' } = result
+      if (id) {
+        nav(`/question/edit/${id}`)
+      }
+    },
+  })
 
   return (
     <div className={styles.container}>
@@ -21,7 +33,8 @@ const ManageLayout: FC = () => {
           type="primary"
           size="large"
           icon={<PlusOutlined />}
-          onClick={() => nav('/question/edit')}
+          onClick={handleCreateQuestion}
+          disabled={loading}
         >
           新建问卷
         </Button>
