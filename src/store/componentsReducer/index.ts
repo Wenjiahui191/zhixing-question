@@ -32,7 +32,7 @@ export const componentSlice = createSlice({
   initialState: INIT_STATE,
   reducers: {
     resetComponents: (state: ComponentStateType, action: PayloadAction<ComponentStateType>) => {
-      state = action.payload
+      return action.payload
     },
     // 重置componentList
     resetComponentList: (
