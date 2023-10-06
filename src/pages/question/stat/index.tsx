@@ -1,12 +1,20 @@
-import useGetQuestionData from '@/hooks/useGetQuestionData'
 import React, { FC } from 'react'
+import styles from './index.module.scss'
+import StatHeader from './StatHeader'
 
 const Stat: FC = () => {
-  const { loading, data, error } = useGetQuestionData()
-
   return (
-    <div>
-      <div>{loading ? 'loading...' : JSON.stringify(data)}</div>
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <StatHeader />
+      </div>
+      <div className={styles['content-wrapper']}>
+        <div className={styles.content}>
+          <div className={styles.left}>左侧</div>
+          <div className={styles.main}>中间</div>
+          <div className={styles.right}>右侧</div>
+        </div>
+      </div>
     </div>
   )
 }

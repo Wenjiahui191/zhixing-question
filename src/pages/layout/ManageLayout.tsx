@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Outlet, useLocation } from 'react-router-dom'
-import { Button, Divider, Space } from 'antd'
+import { Button, Divider, Space, Spin, message } from 'antd'
 import {
   DeleteOutlined,
   PlusOutlined,
@@ -11,6 +11,10 @@ import { useNavigate } from 'react-router-dom'
 import styles from './Manage.module.scss'
 import { useRequest } from 'ahooks'
 import { createQuestionService } from '@/services/question'
+import { getUserToken } from '@/utils/user-token'
+import { LOGIN_PATHNAME } from '@/router'
+import { useLoadUserData } from '@/hooks/useLoadUserData'
+import useNavPage from '@/hooks/useNavPage'
 
 const ManageLayout: FC = () => {
   const nav = useNavigate()
@@ -25,6 +29,9 @@ const ManageLayout: FC = () => {
       }
     },
   })
+
+  const { waitLoadUserData } = useLoadUserData()
+  useNavPage(waitLoadUserData)
 
   return (
     <div className={styles.container}>
@@ -68,7 +75,13 @@ const ManageLayout: FC = () => {
         </Space>
       </div>
       <div className={styles.right}>
-        <Outlet />
+        {waitLoadUserData ? (
+          <div className={styles.loading}>
+            <Spin />
+          </div>
+        ) : (
+          <Outlet />
+        )}
       </div>
     </div>
   )

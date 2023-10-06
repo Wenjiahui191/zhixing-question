@@ -1,0 +1,39 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #d1d1d1;
+
+    .header {
+        background-color: #fff;
+        margin-bottom: 12px;
+    }
+
+    .content-wrapper {
+        flex: auto;
+        padding: 12px;
+
+        .content {
+            height: 100%;
+            display: flex;
+        }
+
+        .left {
+            width: 350px;
+            margin-right: 24px;
+            background-color: #fff;
+        }
+
+        .main {
+            flex: 1;
+            background-color: #fff;
+        }
+
+        .right {
+            width: 400px;
+            margin-left: 24px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+    }
+}

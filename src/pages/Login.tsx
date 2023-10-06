@@ -1,9 +1,12 @@
 import React, { FC, useEffect } from 'react'
 import styles from './Login.module.scss'
-import { Form, Space, Typography, Input, Button, Checkbox } from 'antd'
+import { Form, Space, Typography, Input, Button, Checkbox, message } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
-import { Link } from 'react-router-dom'
-import { REGISTER_PATHNAME } from '../router'
+import { Link, useNavigate } from 'react-router-dom'
+import { MANAGELIST_PATHNAME, REGISTER_PATHNAME } from '../router'
+import { loginService } from '@/services/user'
+import { useRequest } from 'ahooks'
+import { setUserToken } from '@/utils/user-token'
 
 const { Title } = Typography
 
@@ -29,16 +32,35 @@ function getUserInfoFromStorage() {
 }
 
 const Login: FC = () => {
+  const nav = useNavigate()
   const [form] = Form.useForm()
 
   function onFinish(values: any) {
     const { username, password, remember } = values
+    run(username, password)
     if (remember) {
       saveUserInfoToStorage(username, password)
     } else {
       removeUserInfoFromStorage()
     }
   }
+
+  const { run } = useRequest(
+    async (username: string, password: string) => {
+      const data = await loginService(username, password)
+      return data
+    },
+    {
+      manual: true,
+      onSuccess(result) {
+        const { token = '' } = result
+        setUserToken(token)
+
+        message.success('登录成功')
+        nav(MANAGELIST_PATHNAME)
+      },
+    }
+  )
 
   useEffect(() => {
     const { username, password } = getUserInfoFromStorage() || {}

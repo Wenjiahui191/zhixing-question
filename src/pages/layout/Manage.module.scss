@@ -1,15 +1,16 @@
-.container{
+.container {
     display: flex;
     padding: 24px 0;
     margin: 0 auto;
     width: 1200px;
 }
 
-.left{
+.left {
     width: 120px;
     margin-right: 20px;
+
 }
 
-.right{
+.right {
     flex: 1;
 }

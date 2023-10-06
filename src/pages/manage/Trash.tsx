@@ -1,47 +1,53 @@
 import React, { FC, useState } from 'react'
-import { Button, Empty, Space, Table, Tag, Typography, Modal, message } from 'antd'
+import { Button, Empty, Space, Table, Tag, Typography, Modal, message, Spin } from 'antd'
 import ListSearch from '../../components/ListSearch'
 import styles from './common.module.scss'
+import useGetQuestionListData from '@/hooks/useGetQuestionListData'
+import ListPagination from '@/components/ListPagination'
+import { useRequest } from 'ahooks'
+import { deleteQuestionService, updateQuestionService } from '@/services/question'
 
 const { Title } = Typography
 const { confirm } = Modal
 
-const rowQuestionList = [
-  {
-    _id: '1',
-    title: '问卷1',
-    isPublished: true,
-    isStar: false,
-    answerCount: 5,
-    createdAt: '3月13 下午6点10分',
-  },
-  {
-    _id: '2',
-    title: '问卷2',
-    isPublished: true,
-    isStar: true,
-    answerCount: 3,
-    createdAt: '2月22 下午4点11分',
-  },
-]
-
 const Trash: FC = () => {
-  const [questionList, setQuestionList] = useState(rowQuestionList)
   const [selectedIds, setSelectedIds] = useState<string[]>([])
+  const { loading, data = {}, error, refresh } = useGetQuestionListData({ isDeleted: true })
+  const { list = [], total } = data
 
-  const recoverHandler = () => {}
+  const { run: recoverHandler } = useRequest(
+    async () => {
+      for await (const id of selectedIds) {
+        await updateQuestionService(id, { isDeleted: false })
+      }
+    },
+    {
+      manual: true,
+      onSuccess() {
+        message.success('恢复成功')
+        refresh()
+        setSelectedIds([])
+      },
+    }
+  )
 
   const delHandler = () => {
     confirm({
       title: '是否彻底删除选中问卷？',
       okText: '确认',
       cancelText: '取消',
-      onOk: () => {
-        message.success('删除成功')
-        setSelectedIds([])
-      },
+      onOk: delQuestions,
     })
   }
+
+  const { run: delQuestions } = useRequest(async () => await deleteQuestionService(selectedIds), {
+    manual: true,
+    onSuccess() {
+      message.success('删除成功')
+      refresh()
+      setSelectedIds([])
+    },
+  })
 
   const tableColumns = [
     {
@@ -88,7 +94,8 @@ const Trash: FC = () => {
             setSelectedIds(selectedRowKeys as string[])
           },
         }}
-        dataSource={rowQuestionList}
+        style={{ marginBottom: '16px' }}
+        dataSource={list}
         columns={tableColumns}
         pagination={false}
         rowKey={q => q._id}
@@ -106,11 +113,15 @@ const Trash: FC = () => {
           <ListSearch />
         </div>
       </div>
-      <div className={styles.content}>
-        {questionList.length === 0 && <Empty description="暂无内容" />}
-        {questionList.length > 0 && TableItem}
-      </div>
-      <div className={styles.footer}>底部</div>
+      <Spin spinning={loading}>
+        <div className={styles.content}>
+          {list.length === 0 && !loading && <Empty description="暂无内容" />}
+          {list.length > 0 && TableItem}
+        </div>
+        <div className={styles.footer}>
+          <ListPagination total={total} />
+        </div>
+      </Spin>
     </>
   )
 }
