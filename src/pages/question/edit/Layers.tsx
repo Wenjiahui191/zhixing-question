@@ -5,7 +5,7 @@ import { EyeInvisibleOutlined, LockOutlined } from '@ant-design/icons'
 import classnames from 'classnames'
 import { useDispatch } from 'react-redux'
 import {
-  changeCoponentTitle,
+  changeComponentTitle,
   changeSelectedId,
   hideComponent,
   resetComponentList,
@@ -42,7 +42,7 @@ const Layers: FC = () => {
     const newTitle = event.target.value.trim()
     if (!newTitle || !changeSelectedId) return
 
-    dispatch(changeCoponentTitle({ fe_id: currentSelectedId, newTitle }))
+    dispatch(changeComponentTitle({ fe_id: currentSelectedId, newTitle }))
   }
 
   //   显示/隐藏

@@ -23,7 +23,7 @@ export default function useGetQuestionData() {
 
   useEffect(() => {
     if (!data) return
-    const { title = '', desc, js, css, componentList = [] } = data
+    const { title = '', desc, js, css, isPublished, componentList = [] } = data
     let selectedId = ''
     if (componentList.length) {
       selectedId = componentList[0].fe_id
@@ -32,7 +32,7 @@ export default function useGetQuestionData() {
     // 保存组件信息到redux
     dispatch(resetComponents({ componentList, selectedId, copiedComponent: null }))
     // 保存页面信息
-    dispatch(resetPageInfo({ title, desc, js, css }))
+    dispatch(resetPageInfo({ title, desc, js, css, isPublished }))
   }, [data])
 
   useEffect(() => {

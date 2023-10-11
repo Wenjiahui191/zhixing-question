@@ -1,6 +1,7 @@
 import Component from './Component'
 import { QuestionCheckboxDefaultProps } from './type'
 import PropsComponent from './PropsComponent'
+import StatComponent from './StatComponent'
 
 export * from './type'
 
@@ -9,5 +10,6 @@ export default {
   type: 'questionCheckbox',
   Component,
   PropsComponent,
+  StatComponent,
   defaultProps: QuestionCheckboxDefaultProps,
 }

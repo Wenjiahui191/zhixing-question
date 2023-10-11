@@ -11,6 +11,7 @@ const { Title } = Typography
 const QrCodeComponent: FC = () => {
   const { id } = useParams()
   const inputRef = useRef<InputRef>(null)
+  const { isPublished } = useGetPageInfo()
   const url = `http://localhost:3000/question/${id}`
 
   const handleCopy = () => {
@@ -20,6 +21,8 @@ const QrCodeComponent: FC = () => {
     document.execCommand('copy')
     message.success('拷贝成功')
   }
+
+  if (!isPublished) return null
 
   const QrcodeElement = (
     <>
