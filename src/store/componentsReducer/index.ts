@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { ComponentPropsType } from '@comp/questionComponents'
 import { nanoid } from 'nanoid'
 import { arrayMove } from '@dnd-kit/sortable'
-import { produce } from 'immer'
 import { getNextComponentId, insertComponentToList } from './utils'
 // 问卷单个题目的信息类型
 export type ComponentInfoType = {

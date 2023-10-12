@@ -3,7 +3,7 @@ import { Button, Typography } from 'antd'
 import styles from './Home.module.scss'
 import { MANAGELIST_PATHNAME } from '../router'
 import { useNavigate } from 'react-router-dom'
-import Lottie from '@comp/Lottie'
+// import Lottie from '@comp/Lottie'
 
 const { Title, Paragraph } = Typography
 
@@ -23,7 +23,7 @@ const Home: FC = () => {
           </Button>
         </div>
       </div>
-      <Lottie />
+      {/* <Lottie /> */}
     </div>
   )
 }

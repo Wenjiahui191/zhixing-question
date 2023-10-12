@@ -31,16 +31,19 @@
         "recharts": "^2.8.0",
         "redux-undo": "^1.1.0",
         "sass": "^1.68.0",
+        "source-map-explorer": "^2.5.3",
         "web-vitals": "^2.1.4"
     },
     "scripts": {
         "start": "craco start",
+        "analyze": "source-map-explorer 'build/static/js/*.js'",
         "build": "craco build",
-        "test": "craco test",
+        "test": "craco test --watchAll=false",
         "eject": "react-scripts eject",
         "format": "prettier --write \"src/**/*.+(js|jsx|ts|tsx)\"",
         "lint": " eslint \"src/**/*.+(js|jsx|ts|tsx)\"",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "serve": "serve -s ./build"
     },
     "eslintConfig": {
         "extends": [
@@ -64,6 +67,7 @@
         ]
     },
     "devDependencies": {
+        "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
         "@commitlint/config-conventional": "^17.7.0",
         "@craco/craco": "^7.1.0",
         "@typescript-eslint/eslint-plugin": "^6.7.0",
@@ -81,6 +85,7 @@
         "eslint-plugin-react": "^7.33.2",
         "husky": "^8.0.3",
         "prettier": "^3.0.3",
+        "serve": "^14.2.1",
         "typescript": "^5.2.2"
     }
 }

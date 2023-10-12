@@ -1,13 +1,35 @@
+/* eslint-disable no-undef */
 const path = require("path")
 module.exports = {
-    devServer: {
-        port: 8000,
-        proxy: {
-            '/api': 'http://localhost:3030'
-        }
-    },
     webpack: {
-        // 配置别名
+        configure: (webpackConfig) => {
+            if (webpackConfig.mode === 'production') {
+                if (webpackConfig.optimization == null) {
+                    webpackConfig.optimization = {}
+                }
+                webpackConfig.optimization.splitChunks = {
+                    chunks: 'all',
+                    cacheGroups: {
+                        antd: {
+                            name: 'antd-chunk',
+                            test: /antd/,
+                            priority: 100
+                        },
+                        reactDom: {
+                            name: 'reactDom-chunk',
+                            test: /react-dom/,
+                            priority: 99
+                        },
+                        vendors: {
+                            name: 'vendors-chunks',
+                            test: /node_modules/,
+                            priority: 98
+                        }
+                    }
+                }
+            }
+            return webpackConfig
+        },
         alias: {
             // 约定：使用 @ 表示 src 文件所在路径
             "@": path.resolve(__dirname, "src"),
@@ -17,5 +39,11 @@ module.exports = {
             "@services": path.resolve(__dirname, "src", "services"),
             "@hooks": path.resolve(__dirname, "src", "hooks"),
         },
-    }
+    },
+    devServer: {
+        port: 8000,
+        proxy: {
+            '/api': 'http://localhost:3030'
+        }
+    },
 }
