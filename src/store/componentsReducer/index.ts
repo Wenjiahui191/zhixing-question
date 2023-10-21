@@ -153,7 +153,7 @@ export const componentSlice = createSlice({
       state.selectedId = componentList[selectIndex + 1].fe_id
     },
     // 修改组件title
-    changeCoponentTitle: (
+    changeComponentTitle: (
       state: ComponentStateType,
       action: PayloadAction<{ fe_id: string; newTitle: string }>
     ) => {
@@ -179,7 +179,7 @@ export const {
   pasteComponent,
   choPreComponent,
   choNextComponent,
-  changeCoponentTitle,
+  changeComponentTitle,
 } = componentSlice.actions
 
 export default componentSlice.reducer

@@ -1,11 +1,11 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { ComponentInfoType } from './componentsReducer'
 
 export type PageStateType = {
   title: string
   desc?: string
   js?: string
   css?: string
+  isPublished?: boolean
 }
 
 const INIT_STATE: PageStateType = {
