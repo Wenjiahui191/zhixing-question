@@ -38,7 +38,7 @@ const Card: FC<QuestionItem> = (props: QuestionItem) => {
       manual: true,
       onSuccess(result) {
         message.success('复制问卷成功')
-        nav(`/question/edit/${result.id}`)
+        nav(`/question/edit/${result._id}`)
       },
     }
   )
@@ -66,7 +66,7 @@ const Card: FC<QuestionItem> = (props: QuestionItem) => {
 
   // 删除
   const { loading: delLoading, run: delQuestion } = useRequest(
-    async () => await updateQuestionService(_id, { isStar: !isDeletedState }),
+    async () => await updateQuestionService(_id, { isDeleted: !isDeletedState }),
     {
       manual: true,
       onSuccess() {

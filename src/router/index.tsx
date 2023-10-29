@@ -90,7 +90,7 @@ export function isLoginOrRegisterPage(pathname: string) {
 }
 
 // 判断在需要登录
-export function isNoNeedUserInfo(username: string) {
-  if ([HOME_PATHNAME, LOGIN_PATHNAME, REGISTER_PATHNAME].includes(username)) return true
+export function isNoNeedUserInfo(pathname: string) {
+  if ([HOME_PATHNAME, LOGIN_PATHNAME, REGISTER_PATHNAME].includes(pathname)) return true
   return false
 }
