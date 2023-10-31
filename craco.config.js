@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require("path")
 module.exports = {
     webpack: {
@@ -43,7 +44,7 @@ module.exports = {
     devServer: {
         port: 8000,
         proxy: {
-            '/api': 'http://localhost:3030'
+            '/api': 'http://localhost:3004'
         }
     },
 }

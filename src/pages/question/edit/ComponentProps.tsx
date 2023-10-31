@@ -18,7 +18,7 @@ const ComponentProps: FC = () => {
 
   const { type, props, isLocked } = currentComponent
   const ComponentConf = getComponentConf(type)
-  if (!ComponentConf) return
+  if (!ComponentConf) return <></>
 
   const { PropsComponent } = ComponentConf
 

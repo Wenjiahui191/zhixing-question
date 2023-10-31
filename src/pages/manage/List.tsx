@@ -23,7 +23,7 @@ const List: FC = () => {
 
   const { data, loading, loadingMore, noMore } = useInfiniteScroll(handleLoadMore, {
     target: document,
-    isNoMore: d => d?.list.length > d?.total,
+    isNoMore: d => d?.list.length <= d?.total,
     reloadDeps: [searchParams],
   })
 
