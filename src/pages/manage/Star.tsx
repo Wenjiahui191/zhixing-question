@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react'
 import QuestionCard from '../../components/QuestionCard'
-import { Spin, Typography } from 'antd'
+import { Empty, Spin, Typography } from 'antd'
 import ListSearch from '../../components/ListSearch'
 import styles from './common.module.scss'
 import useGetQuestionListData from '@/hooks/useGetQuestionListData'
@@ -24,6 +24,7 @@ const Star: FC = () => {
       </div>
       <Spin spinning={loading}>
         <div className={styles.content}>
+          {!list.length && <Empty />}
           {list.map((item: any) => {
             return <QuestionCard key={item._id} {...item} />
           })}

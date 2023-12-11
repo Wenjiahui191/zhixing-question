@@ -30,9 +30,6 @@ const ManageLayout: FC = () => {
     },
   })
 
-  const { waitLoadUserData } = useLoadUserData()
-  useNavPage(waitLoadUserData)
-
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -75,13 +72,7 @@ const ManageLayout: FC = () => {
         </Space>
       </div>
       <div className={styles.right}>
-        {waitLoadUserData ? (
-          <div className={styles.loading}>
-            <Spin />
-          </div>
-        ) : (
-          <Outlet />
-        )}
+        <Outlet />
       </div>
     </div>
   )

@@ -7,6 +7,7 @@ import {
   isLoginOrRegisterPage,
   isNoNeedUserInfo,
 } from '@/router'
+import { message } from 'antd'
 
 export default function useNavPage(waitLoadUserData: boolean) {
   const nav = useNavigate()

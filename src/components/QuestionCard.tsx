@@ -22,12 +22,12 @@ type QuestionItem = {
   isPublished: boolean
   isStar: boolean
   answerCount: number
-  createdAt: string
+  createAt: string
   isDeleted: boolean
 }
 
 const Card: FC<QuestionItem> = (props: QuestionItem) => {
-  const { title, isPublished, answerCount, createdAt, _id, isStar, isDeleted } = props
+  const { title, isPublished, answerCount, createAt, _id, isStar, isDeleted } = props
   const [isStarState, setisStarState] = useState(isStar)
   const [isDeletedState, setIsDeletedState] = useState(isDeleted)
   const nav = useNavigate()
@@ -38,7 +38,7 @@ const Card: FC<QuestionItem> = (props: QuestionItem) => {
       manual: true,
       onSuccess(result) {
         message.success('复制问卷成功')
-        nav(`/question/edit/${result.id}`)
+        nav(`/question/edit/${result._id}`)
       },
     }
   )
@@ -66,7 +66,7 @@ const Card: FC<QuestionItem> = (props: QuestionItem) => {
 
   // 删除
   const { loading: delLoading, run: delQuestion } = useRequest(
-    async () => await updateQuestionService(_id, { isStar: !isDeletedState }),
+    async () => await updateQuestionService(_id, { isDeleted: !isDeletedState }),
     {
       manual: true,
       onSuccess() {
@@ -96,7 +96,7 @@ const Card: FC<QuestionItem> = (props: QuestionItem) => {
             <Space>
               {isPublished ? <Tag color="processing">已发布</Tag> : <Tag>未发布</Tag>}
               <span>答卷：{answerCount}</span>
-              <span>{createdAt}</span>
+              <span>{createAt}</span>
             </Space>
           </div>
         </div>

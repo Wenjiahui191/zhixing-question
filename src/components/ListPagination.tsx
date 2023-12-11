@@ -31,7 +31,15 @@ const ListPagination: FC<PaginationType> = (props: PaginationType) => {
     setPageSize(currentPageSize)
   }, [searchParams])
 
-  return <Pagination current={page} total={total} pageSize={pageSize} onChange={handleChangePage} />
+  return (
+    <Pagination
+      current={page}
+      total={total}
+      pageSize={pageSize}
+      onChange={handleChangePage}
+      hideOnSinglePage={true}
+    />
+  )
 }
 
 export default ListPagination

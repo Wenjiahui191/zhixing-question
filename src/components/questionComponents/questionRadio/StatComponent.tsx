@@ -27,7 +27,7 @@ const StatComponent: FC<QuestionRadioStatPropsType> = ({ stat }) => {
           dataKey="count"
           nameKey="name"
           fill={'#8884d8'}
-          label={i => `${i.name}:${format(i.count)}%`}
+          label={(i: any) => `${i.name}:${format(i.count)}%`}
         >
           {stat.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={CHART_COLOR_LAB[index]} />

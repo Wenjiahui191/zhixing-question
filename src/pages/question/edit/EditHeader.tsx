@@ -91,13 +91,13 @@ const PublishButton: FC = () => {
   const { loading, run } = useRequest(
     async () => {
       if (!id) return
-      await updateQuestionService(id, { ...pageInfo, componentList, isPublish: true })
+      await updateQuestionService(id, { ...pageInfo, componentList, isPublished: true })
     },
     {
       manual: true,
       onSuccess() {
         message.success('发布成功')
-        nav(`/question/stat/${id}`)
+        nav(`/question/stat/${id}`, { replace: true })
       },
     }
   )

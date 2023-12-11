@@ -17,7 +17,7 @@ const Stat: FC = () => {
   const [selectedComponentType, setSelectedComponentType] = useState('')
 
   function getContentElement() {
-    if (typeof isPublished === 'boolean' && !isPublished) {
+    if (typeof isPublished !== 'boolean' && !isPublished) {
       return (
         <div style={{ flex: '1' }}>
           <Result

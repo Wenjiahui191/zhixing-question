@@ -4,9 +4,11 @@ import { Form, Space, Typography, Input, Button, Checkbox, message } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 import { Link, useNavigate } from 'react-router-dom'
 import { MANAGELIST_PATHNAME, REGISTER_PATHNAME } from '../router'
-import { loginService } from '@/services/user'
+import { getUserInfoService, loginService } from '@/services/user'
 import { useRequest } from 'ahooks'
 import { setUserToken } from '@/utils/user-token'
+import { useDispatch } from 'react-redux'
+import { loginReducer } from '@/store/userReducer'
 
 const { Title } = Typography
 
@@ -32,6 +34,7 @@ function getUserInfoFromStorage() {
 }
 
 const Login: FC = () => {
+  const dispatch = useDispatch()
   const nav = useNavigate()
   const [form] = Form.useForm()
 
@@ -45,6 +48,12 @@ const Login: FC = () => {
     }
   }
 
+  async function getUserInfo() {
+    const { username, nickname } = await getUserInfoService()
+    dispatch(loginReducer({ username, nickname }))
+    return
+  }
+
   const { run } = useRequest(
     async (username: string, password: string) => {
       const data = await loginService(username, password)
@@ -55,9 +64,10 @@ const Login: FC = () => {
       onSuccess(result) {
         const { token = '' } = result
         setUserToken(token)
-
         message.success('登录成功')
-        nav(MANAGELIST_PATHNAME)
+        getUserInfo().then(() => {
+          nav(MANAGELIST_PATHNAME)
+        })
       },
     }
   )
