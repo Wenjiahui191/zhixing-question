@@ -4,7 +4,9 @@
 项目后台使用nodejs开发，使用koa2+mongodb,点击[zhixing-server](https://github.com/Wenjiahui191/zhixing-server)查看  
 用户填写段使用nextjs开发,点击[zhixing-client](https://github.com/Wenjiahui191/zhixing-client)查看
 
-项目演示地址：http://121.37.243.163:81/
+项目演示地址：http://121.37.243.163:81/  
+测试账号：关注公众号点击菜单“测试账号”获取  
+![Image](https://github.com/Wenjiahui191/image-blog/blob/main/freewind/official_account.jpg)
 
 ### 界面展示
 #### 首页(登录状态)
